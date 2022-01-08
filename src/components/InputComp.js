@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const InputComp = ({
   socket,
@@ -9,6 +9,11 @@ const InputComp = ({
   room,
   name,
 }) => {
+  const nameInput = useRef();
+  useEffect(() => {
+    nameInput.current.focus();
+  }, []);
+
   useEffect(() => {
     socket.on("get-history", (data) => {
       setChatHistory(data);
@@ -18,9 +23,11 @@ const InputComp = ({
   }, [socket]);
 
   const joinRoom = () => {
-    const data = { name, room };
-    socket.emit("join-chat-room", data);
-    setShowChat(true);
+    if (name !== "" && room !== "") {
+      const data = { name, room };
+      socket.emit("join-chat-room", data);
+      setShowChat(true);
+    } else alert("something missing!");
   };
 
   return (
@@ -28,8 +35,12 @@ const InputComp = ({
       <input
         type="text"
         placeholder="Enter your name"
+        ref={nameInput}
         onChange={(e) => {
           setName(e.target.value);
+        }}
+        onKeyPress={(e) => {
+          e.key === "Enter" && joinRoom();
         }}
       />
       <input

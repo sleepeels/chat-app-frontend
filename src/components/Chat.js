@@ -68,6 +68,9 @@ const Chat = ({ socket, name, room, history, setShowChat }) => {
 
   return (
     <div className="chat">
+      <div className="room-name">
+        Hi {name}, welcome to {room}
+      </div>
       <div className="chat-history">
         {renderChatHistory()}
         <div ref={dummyDiv}></div>

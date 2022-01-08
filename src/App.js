@@ -5,6 +5,7 @@ import Chat from "./components/Chat";
 import InputComp from "./components/InputComp";
 
 const socket = io.connect("http://localhost:5000");
+// const socket = io.connect("http://https://simplestchatapp.herokuapp.com:5000");
 // const socket = io.connect("http://192.168.1.17:5000");
 
 function App() {

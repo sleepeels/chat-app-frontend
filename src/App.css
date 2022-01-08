@@ -28,6 +28,10 @@ h1 {
   border-radius: 1rem;
   padding: 1rem;
 }
+.room-name {
+  color: white;
+}
+
 .chat-history {
   height: 70vh;
   overflow-y: scroll;
