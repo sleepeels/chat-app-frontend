@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-const InputComp = ({
+const FrontPage = ({
   socket,
   setShowChat,
   setChatHistory,
@@ -58,4 +58,4 @@ const InputComp = ({
   );
 };
 
-export default InputComp;
+export default FrontPage;

@@ -2,7 +2,7 @@ import "./App.css";
 import React, { useState } from "react";
 import io from "socket.io-client";
 import Chat from "./components/Chat";
-import InputComp from "./components/InputComp";
+import Welcome from "./components/Welcome";
 
 const socket = io.connect("http://localhost:5000");
 // const socket = io.connect("http://https://simplestchatapp.herokuapp.com:5000");
@@ -21,7 +21,7 @@ function App() {
       <h1>Simplest Chat App</h1>
       <div>
         {!showChat ? (
-          <InputComp
+          <Welcome
             socket={socket}
             setShowChat={setShowChat}
             setChatHistory={setChatHistory}
