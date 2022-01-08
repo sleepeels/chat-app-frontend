@@ -1,40 +1,48 @@
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
+import { useEffect, useState } from "react";
 
-import { useState } from "react";
+const InputComp = ({
+  socket,
+  setShowChat,
+  setChatHistory,
+  setName,
+  setRoom,
+  room,
+  name,
+}) => {
+  useEffect(() => {
+    socket.on("get-history", (data) => {
+      setChatHistory(data);
+      console.log(data);
+    });
+    console.log("in effect");
+  }, [socket]);
 
-const InputComp = ({ essence }) => {
-  const [name, setName] = useState("");
-
-  const onMessageSubmit = (e) => {
-    e.preventDefault();
-  };
-
-  const onNameChange = (e) => {
-    setName(e.target.value);
+  const joinRoom = () => {
+    const data = { name, room };
+    socket.emit("join-chat-room", data);
+    setShowChat(true);
   };
 
   return (
     <div>
-      <h1>{essence}</h1>
-      <div id="chat-wrapper">
-        <form id="chat-form" autoComplete="off" onSubmit={onMessageSubmit}>
-          <TextField
-            name="name"
-            onChange={(e) => onNameChange(e)}
-            value={name}
-            label="Name"
-          />
-          <Button
-            type="submit"
-            variant="secondery"
-            size="small"
-            color="Primary"
-          >
-            Send Message
-          </Button>
-        </form>
-      </div>
+      <input
+        type="text"
+        placeholder="Enter your name"
+        onChange={(e) => {
+          setName(e.target.value);
+        }}
+      />
+      <input
+        type="text"
+        placeholder="Enter room name to join"
+        onChange={(e) => {
+          setRoom(e.target.value);
+        }}
+        onKeyPress={(e) => {
+          e.key === "Enter" && joinRoom();
+        }}
+      />
+      <button onClick={joinRoom}>Join Room</button>
     </div>
   );
 };

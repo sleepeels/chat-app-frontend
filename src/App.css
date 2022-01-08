@@ -4,19 +4,75 @@
   box-sizing: border-box;
 }
 
-#root {
-  /* width: 70vw; */
-  height: 80vh;
+.main {
+  /* width: 80vw; */
+  height: 100vh;
   margin: auto;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  /* background: linear-gradient(45deg, rgb(112, 34, 34), rgb(76, 112, 34)); */
+  background: rgb(31, 31, 50);
 }
 
-#chat-form {
+h1 {
+  color: rgb(109 68 255);
+  margin-bottom: 1rem;
+}
+
+.chat {
   display: flex;
   flex-direction: column;
-  margin: 1rem;
+  height: 80vh;
+  box-shadow: 0px 0px 30px rgb(42 55 140);
+  border-radius: 1rem;
+  padding: 1rem;
+}
+.chat-history {
+  height: 70vh;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.chat-inputs {
+  margin-top: 1rem;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.me,
+.other {
+  background: white;
+  width: fit-content;
+  border-radius: 0.3rem;
+  margin: 0.2rem;
+  padding: 0.4rem;
+}
+
+.me {
+  color: grey;
+  /* margin-right: auto; */
+}
+.other {
+  color: green;
+  margin-left: auto;
+}
+
+.details {
+  display: block;
+  opacity: 0.8;
+  font-size: 0.6rem;
+}
+
+.message {
+}
+
+button,
+input {
+  padding: 0.2rem;
+  border-radius: 0.4rem;
 }

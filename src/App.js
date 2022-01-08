@@ -1,55 +1,43 @@
 import "./App.css";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import io from "socket.io-client";
-import TextField from "@material-ui/core/TextField";
 import Chat from "./components/Chat";
 import InputComp from "./components/InputComp";
 
 const socket = io.connect("http://localhost:5000");
+// const socket = io.connect("http://192.168.1.17:5000");
 
 function App() {
-  const [chat, setChat] = useState([]);
+  const [name, setName] = useState("");
+  const [room, setRoom] = useState("");
 
-  useEffect(() => {
-    socket.on("message", ({ name, message }) => {
-      setChat([...chat, { name, message }]);
-    });
-  });
+  const [chatHistory, setChatHistory] = useState([]);
 
-  // const onTextChange = (e) => {
-  //   console.log(nameIn.current.value);
-
-  //   setState({ ...state, name: e.target.name, message: e.target.message });
-  // };
-
-  // const onMessageSubmit = (e) => {
-  //   e.preventDefault();
-  //   const { name, message } = chat;
-  //   console.log(name, message);
-  //   socket.emit("message", { name, message });
-  //   setState({ message: "", name });
-  // };
-
-  const renderChat = () => {
-    return chat.map((chat, index) => {
-      return (
-        <div key={index}>
-          <h3>
-            {chat.name}: <span>{chat.message}</span>
-          </h3>
-        </div>
-      );
-    });
-  };
+  const [showChat, setShowChat] = useState(false);
 
   return (
-    <div className="card">
-      <InputComp essence={"write a message"} />
-      <InputComp essence={"choose name"} />
-      <Chat socket={socket} />
+    <div className="main">
+      <h1>Simplest Chat App</h1>
       <div>
-        <h1>Chat Log</h1>
-        {renderChat()}
+        {!showChat ? (
+          <InputComp
+            socket={socket}
+            setShowChat={setShowChat}
+            setChatHistory={setChatHistory}
+            setName={setName}
+            setRoom={setRoom}
+            name={name}
+            room={room}
+          />
+        ) : (
+          <Chat
+            setShowChat={setShowChat}
+            socket={socket}
+            name={name}
+            room={room}
+            history={chatHistory}
+          />
+        )}
       </div>
     </div>
   );
