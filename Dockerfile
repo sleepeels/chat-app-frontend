@@ -1,10 +1,10 @@
 FROM node:12.16.3-alpine as build
 
 WORKDIR /app
+COPY . ./
 RUN npm install
-COPY . ./
 RUN npm run build
-COPY . ./
+
 
 # ---
 FROM fholzer/nginx-brotli:v1.12.2
