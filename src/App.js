@@ -18,7 +18,7 @@ function App() {
 
   return (
     <div className="main">
-      <h1>Simplest Chat App!</h1>
+      <h1> !Simplest Chat App!</h1>
       <div>
         {!showChat ? (
           <Welcome
